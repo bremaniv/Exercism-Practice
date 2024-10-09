@@ -1,0 +1,35 @@
+## scratchpad ##
+
+1. check for criticality 
+ critical conditions:
+- temperature is less than 800 K
+- number of neutrons emitted per second is greater than 500
+- product of temperature and neutrons emitted per second is less than 500000
+
+def is_criticality_balanced(temperature, neutrons_emitted):
+  return temperature < 800 and neutrons_emitted > 500 and temperature*neutrons_emitted < 500000
+
+2. determine the power output range
+
+def reactor_efficiency (voltage , current , theoretical_max_power):
+  generated_power = voltage * current
+  output = (generated_power/theoretical_max_power)*100
+  if int(output) >=80:
+    return "green"
+  elif int(output) < 80 and int(output) >= 60:
+    return "orange"
+  elif int(output) < 60 and int(output) >= 30:
+    return "red"
+  return "black"
+
+
+3. fail safe mechanism
+
+def fail_safe(temperature , neutrons_produced_per_second, threshold):
+  a = temperature * neutrons_produced_per_second
+  b = .9 * threshold
+  if a < b:
+    return "LOW"
+  elif a >= b and a <= (1.1 * threshold):
+    return "NORMAL"
+  return "DANGER"
